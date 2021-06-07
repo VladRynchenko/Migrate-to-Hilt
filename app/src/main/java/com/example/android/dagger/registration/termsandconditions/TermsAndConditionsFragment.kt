@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
@@ -33,8 +34,8 @@ import javax.inject.Inject
 class TermsAndConditionsFragment : Fragment() {
 
     // @Inject annotated fields will be provided by Dagger
-    @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+
+     val registrationViewModel: RegistrationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

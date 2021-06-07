@@ -16,9 +16,18 @@
 
 package com.example.android.dagger.registration
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.example.android.dagger.di.ActivityScope
 import com.example.android.dagger.user.UserManager
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 /**
@@ -29,8 +38,11 @@ import javax.inject.Inject
  * that UserManager is a dependency.
  */
 
-@ActivityScoped
-class RegistrationViewModel @Inject constructor(val userManager: UserManager) {
+
+@HiltViewModel
+class RegistrationViewModel @Inject constructor(
+    val userManager: UserManager
+) : ViewModel(){
 
     private var username: String? = null
     private var password: String? = null

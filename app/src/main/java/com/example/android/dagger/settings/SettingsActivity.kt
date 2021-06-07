@@ -18,28 +18,28 @@ package com.example.android.dagger.settings
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
 import com.example.android.dagger.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
     lateinit var settingsViewModel: SettingsViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    @Inject
+    lateinit var userManager: com.example.android.dagger.user.UserManager
 
-        // Gets the userManager from the application graph to obtain the UserComponent
-        // and gets this Activity injected
-        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, MainActivity.UserManagerEntryPoint::class.java)
-        val userManager = entryPoint.userManager()
-        userManager.userComponent!!.inject(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
